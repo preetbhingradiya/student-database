@@ -2,8 +2,8 @@ const mongoose=require('mongoose')
 
 const connect=async()=>{
 
-    await mongoose.connect("mongodb+srv://preetbhingradiya6:node-js@cluster0.zoupwet.mongodb.net/?retryWrites=true&w=majority")
-
+    await mongoose.connect("mongodb+srv://preetbhingradiya6:node-js@cluster0.qrarbhx.mongodb.net/?retryWrites=true&w=majority")
+    
     console.log("connect to database");
 }
 

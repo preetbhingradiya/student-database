@@ -25,22 +25,47 @@ result.get("/student", async (req, res) => {
 result.get("/student/marks", async (req, res) => {
   let store = await student.find({
     maths: { $gt: 80, $lt: 90 },
+    // maths: { $gt: req.query.maths, $lt: req.query.maths1}
+    // maths 80
+    // maths1 90
     science: { $gt: 50, $lt: 90 },
   });
   res.send(store);
+
+  // let store=await student.find({gender:req.body.name}).sort({science:-1}).limit(1).count()
+  // res.send("ok")
+  // console.log(store);
+
+  // let temp=await student.find({class:"I"}).sort({maths:1}).limit(3)
+  // res.send(temp)
 });
 
 result.get("/student/class", async (req, res) => {
-  let store = await student.find({
-    class:{$gt:"I",$lt:"v"},
-    maths:{$gt:50}
-  });
-  res.send(store);
+  let store = await student
+    .find({
+      class: { $gt: "I", $lt: "v" },
+      maths: { $gt: 50 },
+    })
+    .count();
+  res.send("ok");
+  console.log(store);
+
+  // let temp=await student.find({
+  //     gender:"Female",
+  //     section:"B",
+  //     maths:{$lt:25}
+  // })
+  // res.send(temp)
 });
 
 result.post("/", async (req, res) => {
   let send = await student.create(req.body);
   res.send(send);
+});
+
+result.delete("/:id", async (req, res) => {
+  await student.findByIdAndDelete(req.params.id);
+  res.send("id is delete");
 });
 
 result.listen(7070, () => {
